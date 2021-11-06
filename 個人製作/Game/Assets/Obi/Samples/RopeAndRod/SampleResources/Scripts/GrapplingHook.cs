@@ -32,7 +32,7 @@ public class GrapplingHook : MonoBehaviour
 
     public ObiSolver solver;
     public ObiCollider character;
-    public float hookExtendRetractSpeed = 50;
+    public float hookExtendRetractSpeed = 1;
     public Material material;
     public ObiRopeSection section;
 
@@ -56,7 +56,7 @@ public class GrapplingHook : MonoBehaviour
         ropeRenderer.normalizeV = false;
         ropeRenderer.uvAnchor = 1;
         rope.GetComponent<MeshRenderer>().material = material;
-        rope.distanceConstraintsEnabled = false;
+        //rope.distanceConstraintsEnabled = false;
 
         // Setup a blueprint for the rope:
         // ロープのブループリントを設定する。	

@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
 	private Animator animator;
 	Quaternion targetRotation;
 	private bool isGround = false;
+	public float Multiplier = 1f;
 
 	void Start()
 	{
@@ -37,10 +38,7 @@ public class PlayerController : MonoBehaviour
 		{
 			animator.SetFloat("speed", 0f);
 		}
-
-		velocity.y = Physics.gravity.y * Time.deltaTime;
-		rig.AddForce(velocity * walkSpeed, ForceMode.Force);
-		rig.AddForce(yVelo * walkSpeed, ForceMode.Force);
+		
 		transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed);
 
 		if (yVelo.y > 0.5)
@@ -49,6 +47,11 @@ public class PlayerController : MonoBehaviour
 			animator.SetTrigger("jump");
 		}
 	}
+
+    private void FixedUpdate()
+    {
+		rig.AddForce((Multiplier - 1f) * Physics.gravity, ForceMode.Acceleration);
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
