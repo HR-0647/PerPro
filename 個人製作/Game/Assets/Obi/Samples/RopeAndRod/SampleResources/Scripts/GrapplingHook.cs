@@ -157,7 +157,7 @@ public class GrapplingHook : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(rope.restLength);
+        
             if (Input.GetMouseButtonDown(0))
             {
                 if (!rope.isLoaded)
