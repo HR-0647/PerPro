@@ -32,7 +32,7 @@ public class GrapplingHook : MonoBehaviour
 
     public ObiSolver solver;
     public ObiCollider character;
-    public float hookExtendRetractSpeed = 1;
+    public float hookExtendRetractSpeed = 2f;
     public Material material;
     public ObiRopeSection section;
 
@@ -43,6 +43,8 @@ public class GrapplingHook : MonoBehaviour
     private ObiRopeCursor cursor;
 
     private RaycastHit hookAttachment;
+
+    private bool firstbutton = false;
 
     void Awake()
     {
@@ -157,16 +159,42 @@ public class GrapplingHook : MonoBehaviour
 
     void Update()
     {
-        
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (!rope.isLoaded)
+                firstbutton = true;
+                LaunchHook();
+        }
+
+        if (firstbutton == true)
+        {
             if (Input.GetMouseButtonDown(0))
-            {
-                if (!rope.isLoaded)
-                    LaunchHook();
-                else
+                if (rope.isLoaded)
                     DetachHook();
+        }
 
-            }
+        if (Input.GetMouseButtonDown(1))
+        {
+            if (rope.isLoaded)
+                if (Physics.Raycast(ray, out hookAttachment))
+                {
+                    DetachHook();
+                    firstbutton = false;
+                }
+        }
+        if (rope.restLength <= 5)
+        {
+            hookExtendRetractSpeed = 0;
+        }
+        else
+        {
+            hookExtendRetractSpeed = 1;
+        }
+    }
 
+    private void FixedUpdate()
+    {
         if (rope.isLoaded)
         {
             cursor.ChangeLength(rope.restLength - hookExtendRetractSpeed);

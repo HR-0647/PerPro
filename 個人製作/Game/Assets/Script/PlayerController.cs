@@ -58,6 +58,15 @@ public class PlayerController : MonoBehaviour
 			isGround = true;
 			Multiplier = 25;
 		}
+		//Debug.Log(Multiplier);
+		if(isGround == false)
+        {
+			Multiplier = 500;
+        }
+        else
+        {
+			Multiplier = 25;
+        }
 	}
 
     private void FixedUpdate()
