@@ -163,25 +163,28 @@ public class GrapplingHook : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             if (!rope.isLoaded)
-                firstbutton = true;
+                //firstbutton = true;
                 LaunchHook();
         }
 
-        if (firstbutton == true)
-        {
-            if (Input.GetMouseButtonDown(0))
-                if (rope.isLoaded)
-                    DetachHook();
-        }
+        //if (firstbutton == true)
+        //{
+            //if (Input.GetMouseButtonDown(0))
+            //    if (rope.isLoaded)
+            //        DetachHook();
+        //}
 
         if (Input.GetMouseButtonDown(1))
         {
             if (rope.isLoaded)
-                if (Physics.Raycast(ray, out hookAttachment))
-                {
-                    DetachHook();
-                    firstbutton = false;
-                }
+            {
+                LaunchHook();
+            }
+            //    if (Physics.Raycast(ray, out hookAttachment))
+            //    {
+            //        DetachHook();
+            //        firstbutton = false;
+            //    }
         }
         if (rope.restLength <= 5)
         {

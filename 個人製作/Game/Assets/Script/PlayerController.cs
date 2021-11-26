@@ -27,9 +27,9 @@ public class PlayerController : MonoBehaviour
 
 		velocity = horizontalRotation * new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical")).normalized;
 		yVelo = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Jump"), Input.GetAxis("Vertical"));
-		
-		
-			if (velocity.magnitude > 0.4f)
+
+
+			if (velocity.magnitude > 0.9f) 
 			{
 				animator.SetFloat("speed", velocity.magnitude);
 				animator.SetBool("Ground", true);
@@ -45,23 +45,24 @@ public class PlayerController : MonoBehaviour
 		
 		transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed);
 
-
-		if (yVelo.y > 0.5)
+		//Debug.Log(isGround);
+		if (yVelo.y > 0.5) 
 		{
-			isGround = false;
-			Multiplier = -10;
+			//isGround = false;
+			Multiplier = -20;
 			animator.SetTrigger("jump");
-			animator.SetBool("Ground", false);
+			animator.SetBool("inAir", true);
 		}
 		else
 		{
-			isGround = true;
+			//isGround = true;
+			animator.ResetTrigger("jump");
 			Multiplier = 25;
 		}
-		//Debug.Log(Multiplier);
+		
 		if(isGround == false)
         {
-			Multiplier = 500;
+			Multiplier = 300;
         }
         else
         {
@@ -76,15 +77,18 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "Ground")
+		string name = collision.gameObject.name;
+        if(name=="Plane")
         {
 			isGround = true;
 			animator.SetBool("Ground", true);
         }
-        else
-        {
-			isGround = false;
-			animator.SetBool("Ground", false);
-		}
+  //      else
+  //      {
+		//	isGround = false;
+		//	animator.SetBool("Ground", false);
+		//	animator.SetBool("inAir", true);
+		//}
+		//Debug.Log(name);
 	}
 }
