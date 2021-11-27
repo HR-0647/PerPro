@@ -29,44 +29,42 @@ public class PlayerController : MonoBehaviour
 		yVelo = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Jump"), Input.GetAxis("Vertical"));
 
 
-			if (velocity.magnitude > 0.9f) 
-			{
-				animator.SetFloat("speed", velocity.magnitude);
-				animator.SetBool("Ground", true);
-				transform.LookAt(transform.position + velocity);
-				targetRotation = Quaternion.LookRotation(velocity, Vector3.up);
-			}
-			else
-			{
-				animator.SetFloat("speed", 0f);
-				animator.SetBool("Ground", true);
-			}
-		
-		
-		transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed);
-
-		//Debug.Log(isGround);
-		if (yVelo.y > 0.5) 
+		if (velocity.magnitude > 0.9f&&isGround==true)
 		{
-			//isGround = false;
-			Multiplier = -20;
-			animator.SetTrigger("jump");
-			animator.SetBool("inAir", true);
+			animator.SetFloat("speed", velocity.magnitude);
+			transform.LookAt(transform.position + velocity);
+			targetRotation = Quaternion.LookRotation(velocity, Vector3.up);
 		}
 		else
 		{
-			//isGround = true;
-			animator.ResetTrigger("jump");
+			animator.SetFloat("speed", 0f);
+		}
+
+
+		transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed);
+
+		//Debug.Log(isGround);
+		if (yVelo.y > 0.5&&isGround==true) 
+		{
+			isGround = false;
+			animator.SetBool("Ground", false);
+			Multiplier = -20;
+			animator.SetTrigger("jump");
+		}
+		else
+		{
 			Multiplier = 25;
 		}
 		
 		if(isGround == false)
         {
-			Multiplier = 300;
-        }
+			Multiplier = 50;
+			animator.SetBool("inAir", true);
+		}
         else
         {
 			Multiplier = 25;
+			animator.SetBool("inAir", false);
         }
 	}
 
@@ -83,12 +81,10 @@ public class PlayerController : MonoBehaviour
 			isGround = true;
 			animator.SetBool("Ground", true);
         }
-  //      else
-  //      {
-		//	isGround = false;
-		//	animator.SetBool("Ground", false);
-		//	animator.SetBool("inAir", true);
-		//}
-		//Debug.Log(name);
-	}
+        else
+        {
+			isGround = false;
+			animator.SetBool("Ground", false);
+		}
+    }
 }
