@@ -9,7 +9,8 @@ public class PlayerController : MonoBehaviour
 	private float walkSpeed;
 	private Animator animator;
 	Quaternion targetRotation;
-	private bool isGround = false;
+	public bool isGround = false;
+	public float Multiplier = 1f;
 
 	void Start()
 	{
@@ -27,34 +28,67 @@ public class PlayerController : MonoBehaviour
 		velocity = horizontalRotation * new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical")).normalized;
 		yVelo = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Jump"), Input.GetAxis("Vertical"));
 
-		if (velocity.magnitude > 0.4f)
+
+			if (velocity.magnitude > 0.9f) 
+			{
+				animator.SetFloat("speed", velocity.magnitude);
+				animator.SetBool("Ground", true);
+				transform.LookAt(transform.position + velocity);
+				targetRotation = Quaternion.LookRotation(velocity, Vector3.up);
+			}
+			else
+			{
+				animator.SetFloat("speed", 0f);
+				animator.SetBool("Ground", true);
+			}
+		
+		
+		transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed);
+
+		//Debug.Log(isGround);
+		if (yVelo.y > 0.5) 
 		{
-			animator.SetFloat("speed", velocity.magnitude);
-			transform.LookAt(transform.position + velocity);
-			targetRotation = Quaternion.LookRotation(velocity, Vector3.up);
+			//isGround = false;
+			Multiplier = -20;
+			animator.SetTrigger("jump");
+			animator.SetBool("inAir", true);
 		}
 		else
 		{
-			animator.SetFloat("speed", 0f);
+			//isGround = true;
+			animator.ResetTrigger("jump");
+			Multiplier = 25;
 		}
-
-		velocity.y = Physics.gravity.y * Time.deltaTime;
-		rig.AddForce(velocity * walkSpeed, ForceMode.Force);
-		rig.AddForce(yVelo * walkSpeed, ForceMode.Force);
-		transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed);
-
-		if (yVelo.y > 0.5)
+		
+		if(isGround == false)
         {
-			isGround = false;
-			animator.SetTrigger("jump");
-		}
+			Multiplier = 300;
+        }
+        else
+        {
+			Multiplier = 25;
+        }
 	}
+
+    private void FixedUpdate()
+    {
+		rig.AddForce((Multiplier - 1f) * Physics.gravity, ForceMode.Acceleration);
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "Ground")
+		string name = collision.gameObject.name;
+        if(name=="Plane")
         {
 			isGround = true;
+			animator.SetBool("Ground", true);
         }
-    }
+  //      else
+  //      {
+		//	isGround = false;
+		//	animator.SetBool("Ground", false);
+		//	animator.SetBool("inAir", true);
+		//}
+		//Debug.Log(name);
+	}
 }
