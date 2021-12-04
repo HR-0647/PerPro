@@ -32,12 +32,14 @@ public class LeftGrapplingHand : MonoBehaviour
 
     public ObiSolver solver;
     public ObiCollider LeftHand;
-    public float hookExtendRetractSpeed = 2f;
+    public float hookExtendRetractSpeed = 5f;
     public Material material2;
     public ObiRopeSection section;
     private ObiRope LeftRope;
     private ObiRopeBlueprint blueprint;
     private ObiRopeExtrudedRenderer ropeRenderer;
+    private bool DetachLeft;
+    private bool DetachRope;
 
     private ObiRopeCursor cursor;
 
@@ -147,14 +149,27 @@ public class LeftGrapplingHand : MonoBehaviour
         LeftRope.SetConstraintsDirty(Oni.ConstraintType.Pin);
     }
 
-    private void DetachHook()
+    public void DetachHook()
     {
         // Set the rope blueprint to null (automatically removes the previous blueprint from the solver, if any).
         // ロープのブループリントをnullに設定します（前のブループリントがあれば、ソルバーから自動的に削除されます）。
         LeftRope.ropeBlueprint = null;
-        LeftRope.GetComponent<MeshRenderer>().enabled = false;
+        LeftRope.GetComponent<MeshRenderer>().enabled = false;   
     }
 
+    public bool DetachCheck()
+    {
+        if (DetachLeft == true)
+        {
+            DetachRope = true;
+        }
+        else if(DetachLeft == false)
+        {
+            DetachRope = false;
+        }
+
+        return DetachRope;
+    }
 
     void Update()
     {
@@ -164,14 +179,16 @@ public class LeftGrapplingHand : MonoBehaviour
             if (!LeftRope.isLoaded)
             {
                 LaunchLeftHook();
+                DetachLeft = false;
                 firstPush = true;
             }
         }
-
-        if(firstPush == true)
+        Debug.Log(DetachCheck());
+        if (firstPush == true)
             if (Input.GetMouseButtonDown(0))
             {
                 DetachHook();
+                DetachLeft = true;
             }
 
         if (LeftRope.restLength <= 5)

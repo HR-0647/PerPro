@@ -1159,7 +1159,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 681729570}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.754, y: 1.147, z: 0}
+  m_LocalPosition: {x: 0.5, y: 1.4469999, z: 0.11800003}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 4559183920354240828}
@@ -1208,7 +1208,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 895015290}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.078, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4559183920354240828}
@@ -1236,7 +1236,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 895015290}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 23784754571d1e94f9b46489c3ada6bc, type: 3}
+  m_Script: {fileID: 11500000, guid: 57042e0c3b3ba5048a7233d6028e56f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &981509288
@@ -3127,7 +3127,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1976998526}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.754, y: 1.147, z: 0}
+  m_LocalPosition: {x: -0.5, y: 1.448, z: 0.118}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 4559183920354240828}
@@ -3912,6 +3912,22 @@ PrefabInstance:
       propertyPath: cap
       value: 
       objectReference: {fileID: 232889347}
+    - target: {fileID: 4559183919760597420, guid: ad1f1a198e2b2444b939721fe561d4eb, type: 3}
+      propertyPath: AirTime
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4559183919760597420, guid: ad1f1a198e2b2444b939721fe561d4eb, type: 3}
+      propertyPath: AirSpeed
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 4559183919760597420, guid: ad1f1a198e2b2444b939721fe561d4eb, type: 3}
+      propertyPath: leftHand
+      value: 
+      objectReference: {fileID: 1976998528}
+    - target: {fileID: 4559183919760597420, guid: ad1f1a198e2b2444b939721fe561d4eb, type: 3}
+      propertyPath: rightHand
+      value: 
+      objectReference: {fileID: 681729572}
     - target: {fileID: 4559183919760597420, guid: ad1f1a198e2b2444b939721fe561d4eb, type: 3}
       propertyPath: Multiplier
       value: 25
