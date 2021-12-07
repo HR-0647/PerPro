@@ -77,7 +77,7 @@ public class PlayerController : MonoBehaviour
 
 		if (inAir)
 		{
-			if (airVelocity.magnitude > 0.9f)
+			if (airVelocity.magnitude > 0.8f)
 			{
 				animator.SetFloat("AirSpeed", airVelocity.magnitude);
 				transform.LookAt(transform.position + airVelocity);
@@ -102,8 +102,9 @@ public class PlayerController : MonoBehaviour
 			}
 			Debug.Log(rightHand);
 			Debug.Log(leftHand);
-			if (rightHook == true || leftHook == true && inTime >= AirTime)
+			if (rightHook == true && leftHook == true && inTime >= AirTime)
 			{
+				Debug.Log("a");
 				inTime = AirTime;
 				Multiplier = 50 * 5;
 			}

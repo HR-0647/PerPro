@@ -45,8 +45,6 @@ public class RightGrapplingHand : MonoBehaviour
 
     private RaycastHit hookAttachment;
 
-    private bool firstPush = false;
-
     void Awake()
     {
 
@@ -181,16 +179,15 @@ public class RightGrapplingHand : MonoBehaviour
             {
                 LaunchLeftHook();
                 DetachRight = false;
-                firstPush = true;
             }
         }
         Debug.Log(DetachCheck());
-        if (firstPush == true)
-            if (Input.GetMouseButtonDown(1))
-            {
-                DetachHook();
-                DetachRight = true;
-            }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            DetachHook();
+            DetachRight = true;
+        }
 
         if (RightRope.restLength <= 5)
         {
@@ -201,6 +198,7 @@ public class RightGrapplingHand : MonoBehaviour
             hookExtendRetractSpeed = 1;
         }
     }
+    
 
     private void FixedUpdate()
     {

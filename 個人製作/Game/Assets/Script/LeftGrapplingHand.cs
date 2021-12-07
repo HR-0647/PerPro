@@ -44,9 +44,6 @@ public class LeftGrapplingHand : MonoBehaviour
     private ObiRopeCursor cursor;
 
     private RaycastHit hookAttachment;
-
-    private bool firstPush = false;
-
     void Awake()
     {
 
@@ -180,16 +177,15 @@ public class LeftGrapplingHand : MonoBehaviour
             {
                 LaunchLeftHook();
                 DetachLeft = false;
-                firstPush = true;
             }
         }
         Debug.Log(DetachCheck());
-        if (firstPush == true)
-            if (Input.GetMouseButtonDown(0))
-            {
-                DetachHook();
-                DetachLeft = true;
-            }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            DetachHook();
+            DetachLeft = true;
+        }
 
         if (LeftRope.restLength <= 5)
         {
