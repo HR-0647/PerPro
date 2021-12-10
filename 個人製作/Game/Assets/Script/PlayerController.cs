@@ -100,11 +100,9 @@ public class PlayerController : MonoBehaviour
 					animator.SetBool("jump", false);
 				}
 			}
-			Debug.Log(rightHand);
-			Debug.Log(leftHand);
+
 			if (rightHook == true && leftHook == true && inTime >= AirTime)
 			{
-				Debug.Log("a");
 				inTime = AirTime;
 				Multiplier = 50 * 5;
 			}

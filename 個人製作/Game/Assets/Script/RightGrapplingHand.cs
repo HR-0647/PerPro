@@ -181,7 +181,7 @@ public class RightGrapplingHand : MonoBehaviour
                 DetachRight = false;
             }
         }
-        Debug.Log(DetachCheck());
+        
 
         if (Input.GetMouseButtonDown(1))
         {

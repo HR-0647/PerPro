@@ -179,7 +179,7 @@ public class LeftGrapplingHand : MonoBehaviour
                 DetachLeft = false;
             }
         }
-        Debug.Log(DetachCheck());
+        
 
         if (Input.GetMouseButtonDown(0))
         {
