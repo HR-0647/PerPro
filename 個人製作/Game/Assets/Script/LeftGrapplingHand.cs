@@ -38,8 +38,6 @@ public class LeftGrapplingHand : MonoBehaviour
     private ObiRope LeftRope;
     private ObiRopeBlueprint blueprint;
     private ObiRopeExtrudedRenderer ropeRenderer;
-    private bool DetachLeft;
-    private bool DetachRope;
 
     private ObiRopeCursor cursor;
 
@@ -154,20 +152,6 @@ public class LeftGrapplingHand : MonoBehaviour
         LeftRope.GetComponent<MeshRenderer>().enabled = false;   
     }
 
-    public bool DetachCheck()
-    {
-        if (DetachLeft == true)
-        {
-            DetachRope = true;
-        }
-        else if(DetachLeft == false)
-        {
-            DetachRope = false;
-        }
-
-        return DetachRope;
-    }
-
     void Update()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -176,7 +160,6 @@ public class LeftGrapplingHand : MonoBehaviour
             if (!LeftRope.isLoaded)
             {
                 LaunchLeftHook();
-                DetachLeft = false;
             }
         }
         
@@ -184,7 +167,6 @@ public class LeftGrapplingHand : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             DetachHook();
-            DetachLeft = true;
         }
 
         if (LeftRope.restLength <= 5)
