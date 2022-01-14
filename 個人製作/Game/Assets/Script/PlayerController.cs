@@ -74,6 +74,7 @@ public class PlayerController : MonoBehaviour
 				transform.Translate(Vector3.forward * Time.deltaTime * 10);
 			}
 		}
+		
 
 		transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed);
 
@@ -95,7 +96,7 @@ public class PlayerController : MonoBehaviour
 
 		if (isGround == true)
 		{
-			Multiplier = 25;
+			Multiplier = 15;
 		}
 	}
 
